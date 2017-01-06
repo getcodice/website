@@ -5,7 +5,6 @@ use Dotenv\Dotenv;
 use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 chdir('..');
 
@@ -64,22 +63,11 @@ $app->get('/', function (Application $app) use ($config) {
     return 'todo';
 });
 
-$app->error(function (HttpException $e) use($app, $config) {
-    if ($e->getStatusCode() == 404) {
-        return new Response(
-            $app['twig']->render(
-                'docs/404.twig',
-                [
-                    'chapter' => '',
-                    'github_url' => $config['docs']['github_url'],
-                    'menu' => $app['docs']->renderMenu($app['docs']->getMenu($app['docs']->getSelectedVersion()), ''),
-                    'version' => $app['docs']->getSelectedVersion(),
-                    'versions' => $app['docs']->getVersions(),
-                ]
-            ), 
-            $e->getStatusCode()
-        );
-    }
+$app->error(function (Exception $e) use ($app) {
+    return new Response(
+        $app['twig']->render('errors/' . ($e->getStatusCode() === 404 ? '404' : 'generic') . '.twig'),
+        $e->getStatusCode()
+    );
 });
 
 $app->run();
