@@ -5,6 +5,7 @@ use Dotenv\Dotenv;
 use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 chdir('..');
 
@@ -20,7 +21,7 @@ $config = array_merge($config, $config2);
 
 $app = new Application();
 
-$app['debug'] = true;
+$app['debug'] = $config['app']['debug'];
 
 $app->register(new DocumentationServiceProvider(), array(
     'docs.config' => $config['docs'],
@@ -64,10 +65,19 @@ $app->get('/', function (Application $app) use ($config) {
 });
 
 $app->error(function (Exception $e) use ($app) {
-    return new Response(
-        $app['twig']->render('errors/' . ($e->getStatusCode() === 404 ? '404' : 'generic') . '.twig'),
-        $e->getStatusCode()
-    );
+    if ($app['debug']) {
+        throw $e;
+    }
+
+    if ($e instanceof HttpException) {
+        $statusCode = $e->getStatusCode();
+        $template = $e->getStatusCode() === 404 ? '404' : 'generic';
+    } else {
+        $statusCode = 500;
+        $template = 'generic';
+    }
+
+    return new Response($app['twig']->render("errors/{$template}.twig"), $statusCode);
 });
 
 $app->run();
