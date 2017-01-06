@@ -4,8 +4,8 @@
 <li class="dropdown">
     <a href="#" data-toggle="dropdown">{{ version }} <span class="caret"></span></a>
     <ul class="dropdown-menu">
-        {% for version in versions %}
-            <li class="{{ (version == version ? 'active' : '') }}"><a href="{{ base }}docs/switch-version/{{version}}">{{ version }}</a></li>
+        {% for name in versions %}
+            <li class="{{ (version == name ? 'active' : '') }}"><a href="{{ base }}docs/switch-version/{{name}}">{{ name }}</a></li>
         {% endfor %}
     </ul>
 </li>
