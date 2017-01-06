@@ -52,7 +52,8 @@ $app->get('/docs/{chapter}', function (Application $app, $chapter) use ($config)
     return $app->redirect($config['app']['base_url'] . "docs/$version/$chapter");
 });
 
-$app->get('/docs', function (Application $app) {
+// Fixme: enforcing slash is a bit hacky
+$app->get('/docs/', function (Application $app) {
     $chapter = 'installation';
     $version = $app['docs']->getSelectedVersion();
 
