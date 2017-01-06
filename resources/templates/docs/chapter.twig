@@ -11,11 +11,17 @@
         <h4 class="modal-title" id="myModalLabel">{{ title }}: edit page</h4>
       </div>
       <div class="modal-body">
+      {% if version == "master" %}
+        You are about to edit <strong>master</strong> version of the documentation. Click below to proceed.
+      {% else %}
         Which version of documentation would you like to edit? Choose <strong>v{{ version }}</strong> if change should apply
         only to documentation for this version of Codice or <strong>master</strong> if it's related to all versions.
+      {% endif %}
       </div>
       <div class="modal-footer">
+      {% if version != "master" %}
         <a href="{{ github_url }}/edit/v/{{ version }}/{{ chapter }}.md" class="btn btn-default">Edit v{{ version }}</a>
+      {% endif %}
         <a href="{{ github_url }}/edit/master/{{ chapter }}.md" class="btn btn-primary">Edit master</a>
       </div>
     </div>
