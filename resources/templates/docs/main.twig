@@ -1,0 +1,26 @@
+{% extends "main.twig" %}
+
+{% block navbar_right %}
+<li class="dropdown">
+    <a href="#" data-toggle="dropdown">{{ version }} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        {% for version in versions %}
+            <li class="{{ (version == version ? 'active' : '') }}"><a href="{{ base }}docs/switch-version/{{version}}">{{ version }}</a></li>
+        {% endfor %}
+    </ul>
+</li>
+<li><a href="{{ github_url }}"><i class="fa fa-github"></i></a></li>
+{% endblock %}
+
+{% block content %}
+<div class="container docs-container">
+    <aside class="col-md-3 codice-container">
+        <ul class="docs-menu list-unstyled">
+            {{ menu|raw }}
+        </ul>
+    </aside>
+    <main class="col-md-9 codice-container">
+        {% block docs_content %}{% endblock %}
+    </main>
+</div>
+{% endblock %}
