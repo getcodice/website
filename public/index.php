@@ -57,7 +57,10 @@ $app->get('/docs/', function (Application $app) {
 });
 
 $app->get('/', function (Application $app) {
-    return 'todo';
+    return $app->render('home.twig', [
+        'github_url' => $app['config']['app']['github_url'],
+        'home' => true,
+    ]);
 });
 
 $app->error(function (Exception $e) use ($app) {

@@ -17,9 +17,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ base }}"><img src="{{ base }}assets/images/brand.png"></a>
+                <a class="navbar-brand {{ home is defined ? 'active' : '' }}" href="{{ base }}"><img src="{{ base }}assets/images/brand.png"></a>
             </div>
             <div class="collapse navbar-collapse" id="navigation">
+                <ul class="nav navbar-nav">
+                    <li class="{{ chapter is defined ? 'active' : '' }}"><a href="{{ base }}docs/">Documentation</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% block navbar_right %}{% endblock %}
                 </ul>
