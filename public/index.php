@@ -37,6 +37,18 @@ $app->get('/docs/switch-version/{version}', function (Application $app, $version
     return $response;
 });
 
+$app->get('/docs/{version}/images/{name}.png', function (Application $app, $version, $name) {
+    if (!preg_match('#^[a-zA-Z0-9-]+$#', $name)) {
+        die;
+    }
+
+    $path = $app['config']['docs']['path'] . $version . '/images/' . $name . '.png';
+
+    $response = new Response(readfile($path), 200, ['Content-Type' => 'application/json']);
+
+    return $response;
+});
+
 $app->get('/docs/{version}/{chapter}', function (Application $app, $version, $chapter) {
     return $app['docs']->displayChapter($app, $chapter, $version);
 });
@@ -48,8 +60,7 @@ $app->get('/docs/{chapter}', function (Application $app, $chapter) {
     return $app->redirect("docs/$version/$chapter");
 });
 
-// Fixme: enforcing slash is a bit hacky
-$app->get('/docs/', function (Application $app) {
+$app->get('/docs', function (Application $app) {
     $chapter = 'installation';
     $version = $app['docs']->getSelectedVersion();
 
