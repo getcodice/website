@@ -43,7 +43,7 @@ class Documentation
 
         $app['twig']->addGlobal('chapter', $chapter);
 
-        return $app['twig']->render('docs/chapter.twig', [
+        return $app->render('docs/chapter.twig', [
             // Chapter-specific
             'contents' => $contents,
             'title' => $title,

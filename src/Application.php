@@ -3,9 +3,12 @@
 namespace CodiceWeb;
 
 use Silex\Application as Silex;
+use Silex\Application\TwigTrait;
 
 class Application extends Silex
 {
+    use TwigTrait;
+
     public function __construct(array $values = [])
     {
         $values['config'] = $this->loadConfig();

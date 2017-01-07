@@ -73,7 +73,7 @@ $app->error(function (Exception $e) use ($app) {
         $template = 'generic';
     }
 
-    return new Response($app['twig']->render("errors/{$template}.twig"), $statusCode);
+    return new Response($app->renderView("errors/{$template}.twig"), $statusCode);
 });
 
 $app->run();
