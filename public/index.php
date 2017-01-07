@@ -39,11 +39,11 @@ $app->get('/docs/switch-version/{version}', function (Application $app, $version
 });
 
 $app->get('/docs/{version}/images/{name}.png', function (Application $app, $version, $name) {
-    if (!preg_match('#^[a-zA-Z0-9-]+$#', $name)) {
-        die;
-    }
-
     $path = $app['config']['docs']['path'] . $version . '/images/' . $name . '.png';
+
+    if (!preg_match('#^[a-zA-Z0-9-]+$#', $name) || !file_exists($path)) {
+        $app->abort(404, 'Page not found');
+    }
 
     $response = new BinaryFileResponse($path, 200, ['content-type' => 'image/png']);
 
