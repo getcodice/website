@@ -7,6 +7,21 @@ $branches = explode(',', get_option('-b', '0.4,master'));
 $rootDir = rtrim(get_option('-d', __DIR__.'/../docs'), '/');
 $lastArgumentIndex = count($args) - 1;
 
+if (in_array('--help', $args) || in_array('-h', $args)) {
+    echo <<<HELP
+Downloads and updates Codice documentation.
+
+Usage:
+  {$argv[0]} [-b BRANCHES] [-d DESTDIR]
+
+Options:
+  -b  Comma-delimited set of branches to be cloned.
+  -d  The root directory to act on, default: docs/
+
+HELP;
+    exit(0);
+}
+
 if (!is_dir($rootDir)) {
     if (file_exists($rootDir)) {
         fprintf(STDERR, "{$rootDir} exists but is not a directory. Cannot continue.\n");
