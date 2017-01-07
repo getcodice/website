@@ -1,19 +1,17 @@
 #!/bin/php
 <?php
 
+use CodiceWeb\Application;
 use CodiceWeb\Providers\DocumentationServiceProvider;
-use Silex\Application;
 
 chdir('..');
 
 require 'vendor/autoload.php';
 
-$config = require 'config/docs.php';
-
 $app = new Application();
 
 $app->register(new DocumentationServiceProvider(), array(
-    'docs.config' => $config['docs'],
+    'docs.config' => $app['config']['docs'],
 ));
 
 // Remove images dir and recreate it from scratch
@@ -25,7 +23,7 @@ foreach ($app['docs']->getVersions() as $version)
     // First make a directory for this version
     mkdir("public/docs/images/{$version}");
 
-    $images = glob("{$config['docs']['path']}{$version}/images/*");
+    $images = glob("{$app['config']['docs']['path']}{$version}/images/*");
     
     foreach ($images as $source) {
         $filename = array_reverse(explode('/', $source))[0];

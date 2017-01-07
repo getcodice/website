@@ -1,8 +1,8 @@
 <?php
 
+use CodiceWeb\Application;
 use CodiceWeb\Providers\DocumentationServiceProvider;
 use Dotenv\Dotenv;
-use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -15,26 +15,22 @@ require './vendor/autoload.php';
 $dotenv = new Dotenv(dirname(__DIR__));
 $dotenv->load();
 
-$config = require 'config/app.php';
-$config2 = require 'config/docs.php';
-$config = array_merge($config, $config2);
-
 $app = new Application();
 
-$app['debug'] = $config['app']['debug'];
+$app['debug'] = $app['config']['app']['debug'];
 
 $app->register(new DocumentationServiceProvider(), array(
-    'docs.config' => $config['docs'],
+    'docs.config' => $app['config']['docs'],
 ));
 
 $app->register(new TwigServiceProvider(), array(
     'twig.path' => 'resources/templates/',
 ));
 
-$app['twig']->addGlobal('base', $config['app']['base_url']);
+$app['twig']->addGlobal('base', $app['config']['app']['base_url']);
 
-$app->get('/docs/switch-version/{version}', function (Application $app, $version) use ($config) {
-    $response = $app->redirect($config['app']['base_url'] . 'docs');
+$app->get('/docs/switch-version/{version}', function (Application $app, $version) {
+    $response = $app->redirect($app['config']['app']['base_url'] . 'docs');
 
     $response = $app['docs']->setSelectedVersion($response, $version);
 
@@ -45,11 +41,11 @@ $app->get('/docs/{version}/{chapter}', function (Application $app, $version, $ch
     return $app['docs']->displayChapter($app, $chapter, $version);
 });
 
-$app->get('/docs/{chapter}', function (Application $app, $chapter) use ($config) {
+$app->get('/docs/{chapter}', function (Application $app, $chapter) {
     // Redirect to an URL containing version
     $version = $app['docs']->getSelectedVersion();
 
-    return $app->redirect($config['app']['base_url'] . "docs/$version/$chapter");
+    return $app->redirect($app['config']['app']['base_url'] . "docs/$version/$chapter");
 });
 
 // Fixme: enforcing slash is a bit hacky
@@ -60,7 +56,7 @@ $app->get('/docs/', function (Application $app) {
     return $app['docs']->displayChapter($app, $chapter, $version);
 });
 
-$app->get('/', function (Application $app) use ($config) {
+$app->get('/', function (Application $app) {
     return 'todo';
 });
 

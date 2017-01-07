@@ -4,7 +4,6 @@ namespace CodiceWeb;
 
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
-use Silex\Application;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
