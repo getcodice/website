@@ -30,7 +30,7 @@ $app->register(new TwigServiceProvider(), array(
 $app['twig']->addGlobal('base', $app['config']['app']['base_url']);
 
 $app->get('/docs/switch-version/{version}', function (Application $app, $version) {
-    $response = $app->redirect($app['config']['app']['base_url'] . 'docs');
+    $response = $app->redirect('docs/');
 
     $response = $app['docs']->setSelectedVersion($response, $version);
 
@@ -45,7 +45,7 @@ $app->get('/docs/{chapter}', function (Application $app, $chapter) {
     // Redirect to an URL containing version
     $version = $app['docs']->getSelectedVersion();
 
-    return $app->redirect($app['config']['app']['base_url'] . "docs/$version/$chapter");
+    return $app->redirect("docs/$version/$chapter");
 });
 
 // Fixme: enforcing slash is a bit hacky
