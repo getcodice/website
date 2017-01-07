@@ -5,6 +5,7 @@ use CodiceWeb\Providers\DocumentationServiceProvider;
 use Dotenv\Dotenv;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 chdir('..');
@@ -31,6 +32,7 @@ $app['twig']->addGlobal('base', $app['config']['app']['base_url']);
 
 $app->get('/docs/switch-version/{version}', function (Application $app, $version) {
     $response = $app->redirect('docs');
+
     $response = $app['docs']->setSelectedVersion($response, $version);
 
     return $response;
@@ -43,7 +45,7 @@ $app->get('/docs/{version}/images/{name}.png', function (Application $app, $vers
 
     $path = $app['config']['docs']['path'] . $version . '/images/' . $name . '.png';
 
-    $response = new Response(readfile($path), 200, ['Content-Type' => 'application/json']);
+    $response = new BinaryFileResponse($path, 200, ['content-type' => 'image/png']);
 
     return $response;
 });
