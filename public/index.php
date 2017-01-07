@@ -30,8 +30,7 @@ $app->register(new TwigServiceProvider(), array(
 $app['twig']->addGlobal('base', $app['config']['app']['base_url']);
 
 $app->get('/docs/switch-version/{version}', function (Application $app, $version) {
-    $response = $app->redirect('docs/');
-
+    $response = $app->redirect('docs');
     $response = $app['docs']->setSelectedVersion($response, $version);
 
     return $response;
