@@ -104,7 +104,7 @@ class Documentation
 
     public function getMenu($version)
     {
-        return $this->config['menu'];
+        return require $this->config['path'] . $version . '/_menu.php';
     }
 
     public function renderMenu($menu, $chapter)
