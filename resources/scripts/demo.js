@@ -4,6 +4,8 @@
 // Marking as done
 // fixme: deduplicate code
 $('#demo-note-1 .demo-done').on('click', function(e) {
+    e.preventDefault();
+
     //var $note = $(this).closest('article.note');
     var $note = $('#demo-note-1');
 
@@ -18,6 +20,8 @@ $('#demo-note-1 .demo-done').on('click', function(e) {
     }
 });
 $('#demo-note-2 .demo-done').on('click', function(e) {
+    e.preventDefault();
+
     //var $note = $(this).closest('article.note');
     var $note = $('#demo-note-2');
 
@@ -36,6 +40,8 @@ $('#demo-note-2 .demo-done').on('click', function(e) {
 
 // Editing note, same action for both
 $('.demo-edit').on('click', function(e) {
+    e.preventDefault();
+
     var $note = $(this).closest('article.note');
 
     $note.find('.note-content p').text('Get Codice to try out all of the features!');
@@ -44,6 +50,8 @@ $('.demo-edit').on('click', function(e) {
 // Removing note
 // Allow to remove first one, change second one into blah blah
 $('#demo-note-1 .demo-remove').on('click', function(e) {
+    e.preventDefault();
+
     var $note = $('#demo-note-1');
 
     $note.fadeOut(450, function() {
@@ -51,6 +59,8 @@ $('#demo-note-1 .demo-remove').on('click', function(e) {
     });
 });
 $('#demo-note-2 .demo-remove').on('click', function(e) {
+    e.preventDefault();
+
     var $note = $('#demo-note-2');
     newText = 'Baby don\'t hurt me, no more! Get Codice below and remove any note you want, any time you want.';
 
