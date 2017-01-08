@@ -103,6 +103,7 @@ $app->get('/', function (Application $app) {
     session_unset();
 
     return $app->render('home.twig', [
+        'expiration_date' => date('m/d/Y', strtotime('+1 day')),
         'github_url' => $app['config']['app']['github_url'],
         'home' => true,
         'message' => $message,
