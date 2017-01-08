@@ -30,6 +30,10 @@ $('#demo-note-2 .demo-done').on('click', function(e) {
         $note.addClass('note-success');
         $note.find('.note-expired').addClass('sr-only');
         $(this).find('.text').text('Undone');
+    } else if ($note.hasClass('note-warning')) {
+        $note.removeClass('note-warning');
+        $note.addClass('note-success');
+        $note.find('.note-expired').addClass('sr-only');
     } else {
         $note.removeClass('note-success');
         $note.addClass('note-info');
