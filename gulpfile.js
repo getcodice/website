@@ -11,6 +11,7 @@ gulp.task('scripts', function () {
         './node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
         './resources/scripts/prism.js',
         './resources/scripts/codice.js',
+        './resources/scripts/demo.js',
     ]).pipe(concat('docs.js', { separator: ';' }))
       .pipe(gulp.dest('./public/assets/js'));
 });

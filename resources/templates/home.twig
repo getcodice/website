@@ -5,5 +5,134 @@
 {% endblock %}
 
 {% block content %}
-To be done...
+{% if message != '' and message_type != '' %}
+<div class="alert alert-{{ message_type }} alert-fixed">
+    <p>{{ message }}</p>
+</div>
+{% endif %}
+
+<main class="home">
+    <section id="intro">
+        <p class="intro container">Codice is online note-taking and task-management application.</p>
+
+        <div class="notes">
+            <div class="container">
+                <article class="note note-default" id="demo-note-1">
+                    <div class="note-body">
+                        <ul class="note-labels">
+                            <li><span class="label label-primary">Demo</span></li>
+                        </ul>
+
+                        <div class="note-content has-labels">
+                            <p>Write down everything you want!</p>
+                        </div>
+                    </div>
+                    <div class="note-footer">
+                        <span class="fa fa-clock-o"></span> 24 minutes ago
+                        <span class="note-buttons">
+                            <a href="#" class="demo-done">
+                                <span class="fa fa-check"></span> <span class="text">Done</span>
+                            </a>
+                            <a href="#" class="demo-edit">
+                                <span class="fa fa-pencil"></span> <span class="text">Edit</span>
+                            </a>
+                            <a href="#" class="demo-remove">
+                                <span class="fa fa-trash-o"></span> <span class="text">Remove</span>
+                            </a>
+                        </span>
+                    </div>
+                </article>
+                <article class="note note-info" id="demo-note-2">
+                    <div class="note-body">
+                        <ul class="note-labels">
+                            <li><span class="label label-danger">Important</span></li>
+                            <li><span class="label label-primary">Demo</span></li>
+                        </ul>
+
+                        <div class="note-content has-labels">
+                            <p>
+                                Assign expiration time to turn <em>note</em> into a <em>task</em>.
+                                Marking it as done is a matter of one click. Hover and try it yourself!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="note-footer">
+                        <span class="fa fa-clock-o"></span> 24 minutes ago
+                        <span class="note-expired">
+                            <span class="fa fa-warning"></span> Expires at 01/09/2017 08:00
+                        </span>
+                        <span class="note-buttons">
+                            <a href="#" class="demo-done">
+                                <span class="fa fa-check"></span> <span class="text">Done</span>
+                            </a>
+                            <a href="#" class="demo-edit">
+                                <span class="fa fa-pencil"></span> <span class="text">Edit</span>
+                            </a>
+                            <a href="#" class="demo-remove">
+                                <span class="fa fa-trash-o"></span> <span class="text">Remove</span>
+                            </a>
+                        </span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="container">
+        <h2>Features</h2>
+
+        <div class="row" style="margin: 0 auto">
+            <div class="col-md-4 feature">
+                <div class="feature-text">
+                    <div class="feature-icon"><i class="fa fa-sticky-note-o fa-5x"></i></div>
+                    <p>
+                        Power of Markdown and the visual editor for writing down all your thoughts.
+                        You can organize them with labels and search in miliseconds to never forget
+                        anything important.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 feature">
+                <div class="feature-text">
+                    <div class="feature-icon"><i class="fa fa-tasks fa-5x"></i></div>
+                    <p>
+                        Tasks with expiration time, builtin reminders and colorful status indicators
+                        so everything is clear on the quick glance.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 feature">
+                <div class="feature-text">
+                    <div class="feature-icon"><i class="fa fa-plug fa-5x"></i></div>
+                    <p>
+                        Extensions system to save you from the bloated experience but allow to increase
+                        the possibilities as you need them. Markdown sucks? That's fine, switch for clay
+                        tablets of Sumerians today™!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="wip" class="container">
+        <h2>The sad part</h2>
+        <p>
+            Sounds appealing? Thanks! However, some work still must be done. With over
+            <!-- Place a counter so that @winek is happy -->
+            <span class="counter"><span>3</span><span>4</span><span>0</span></span>
+            commits we're currently rather close to the open beta. Do you want to stay in touch?
+            No spam, promise! Maybe three or four of most important status updates in total.
+        </p>
+
+        <form action="subscribe" method="post" id="subscribe">
+            <input type="email" name="email" placeholder="Your e-mail">
+            <input type="text" name="question" placeholder="What did Sumerians made they tablets of?">
+            <button type="submit">Subscribe</button>
+    </section>
+
+    <section id="footer">
+        <a href="http://codice.eu/docs">Documentation</a>
+        <a href="https://github.com/Sobak/Codice">Source code</a>
+    </section>
+</main>
 {% endblock %}
