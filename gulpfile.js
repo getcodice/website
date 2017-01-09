@@ -1,9 +1,12 @@
 'use strict';
 
-var plugins = require('gulp-load-plugins')();
 var gulp    = require('gulp');
 var gutil   = require('gulp-util');
-var concat  = require('gulp-concat-util');
+var plugins = {
+    concat: require('gulp-concat'),
+    csso: require('gulp-csso'),
+    sass: require('gulp-sass'),
+};
 
 gulp.task('scripts', function () {
     return gulp.src([
@@ -12,7 +15,7 @@ gulp.task('scripts', function () {
         './resources/scripts/prism.js',
         './resources/scripts/codice.js',
         './resources/scripts/demo.js',
-    ]).pipe(concat('docs.js', { separator: ';' }))
+    ]).pipe(plugins.concat('docs.js'))
       .pipe(gulp.dest('./public/assets/js'));
 });
 
