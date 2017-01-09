@@ -28,16 +28,16 @@ $('#demo-note-2 .demo-done').on('click', function(e) {
     if ($note.hasClass('note-info')) {
         $note.removeClass('note-info');
         $note.addClass('note-success');
-        $note.find('.note-expired').addClass('sr-only');
+        $note.find('.note-expired').addClass('hide');
         $(this).find('.text').text('Undone');
     } else if ($note.hasClass('note-warning')) {
         $note.removeClass('note-warning');
         $note.addClass('note-success');
-        $note.find('.note-expired').addClass('sr-only');
+        $note.find('.note-expired').addClass('hide');
     } else {
         $note.removeClass('note-success');
         $note.addClass('note-info');
-        $note.find('.note-expired').removeClass('sr-only');
+        $note.find('.note-expired').removeClass('hide');
         $(this).find('.text').text('Done');
     }
 });
@@ -72,5 +72,5 @@ $('#demo-note-2 .demo-remove').on('click', function(e) {
     $note.removeClass('note-success');
     $note.removeClass('note-info');
     $note.addClass('note-warning');
-    $note.find('.note-expired').removeClass('sr-only'); // Ensure expiration time is shown
+    $note.find('.note-expired').removeClass('hide'); // Ensure expiration time is shown
 });
