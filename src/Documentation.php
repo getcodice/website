@@ -117,7 +117,7 @@ class Documentation
 
             if ($url === 'header') {
                 $output .= '<li class="docs-menu-header">' . $text . '</li>';
-            } elseif (substr($url, 0, 5) === 'http:') {
+            } elseif (substr($url, 0, 4) === 'http') {
                 $output .= '<li><a href="' . $url . '">' . $text . '</a></li>';
             } else {
                 $class = $url === $chapter ? 'active' : '';
