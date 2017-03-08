@@ -63,8 +63,8 @@ $app->get('/docs/{chapter}', function (Application $app, $chapter) {
 });
 
 $app->get('/docs', function (Application $app) {
-    $chapter = 'installation';
     $version = $app['docs']->getSelectedVersion();
+    $chapter = $app['docs']->getDefaultChapter($version);
 
     return $app['docs']->displayChapter($app, $chapter, $version);
 });

@@ -57,6 +57,12 @@ class Documentation
         ]);
     }
 
+    public function getDefaultChapter($version)
+    {
+        // Return first chapter (and skip first element being header)
+        return $this->getMenu($version)[1][0];
+    }
+
     public function getVersions() {
         if (empty(self::$versions)) {
             self::$versions = array_values(array_diff(scandir($this->config['path']), ['.', '..']));
