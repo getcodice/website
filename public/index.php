@@ -30,6 +30,7 @@ $app->register(new TwigServiceProvider(), array(
 ));
 
 $app['twig']->addGlobal('base', $app['config']['app']['base_url']);
+$app['twig']->addGlobal('analytics', $app['config']['app']['analytics']);
 
 $app->get('/docs/switch-version/{version}', function (Application $app, $version) {
     $response = $app->redirect('docs');
