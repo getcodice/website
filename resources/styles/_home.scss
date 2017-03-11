@@ -59,67 +59,36 @@ section#features {
 }
 
 //
-// #wip
+// #download
 //
-section#wip {
+section#download {
     padding-bottom: 60px;
 
     p {
         font-size: 1.3em;
         line-height: 2em;
+        margin-bottom: 20px;
         text-align: center;
     }
 }
 
-.counter {
-    span {
-        background: #000;
-        border-radius: 2px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-        color: white;
-        display: inline-block;
-        font-weight: 500;
-        margin: 0 3px;
-        padding: 0 4px;
-    }
+.download-button {
+    margin: 0 auto;
+    text-align: center;
 }
 
-#subscribe {
-    margin: 20px auto;
-    width: 70%;
+.download-notes {
+    color: #666;
+    display: block;
+    font-size: 0.9em;
+    text-decoration: none;
+}
 
-    input, button {
-        border: 2px solid #e0e0e0;
-        font-size: 1.2em;
-        float: left;
-        margin: 0;
-        padding: 10px;
-    }
-
-    input:focus {
-        outline: none;
-    }
-
-    input[type="email"] {
-        width: 30%;
-        border-right: none;
-    }
-
-    input[type="text"] {
-        width: 50%;
-        border-right: none;
-    }
-
-    button {
-        background: #e0e0e0;
-        text-transform: uppercase;
-        width: 20%;
-
-        &:focus, &:hover {
-            background: #e5e5e5;
-            border-color: #e5e5e5;
-        }
-    }
+.btn-xl {
+    padding: 20px 32px;
+    font-size: 24px;
+    line-height: normal;
+    border-radius: 0;
 }
 
 //

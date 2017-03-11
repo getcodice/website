@@ -103,8 +103,14 @@ $app->get('/', function (Application $app) {
     $message_type = isset($_SESSION['message_type']) ? $_SESSION['message_type'] : null;
     session_unset();
 
+    $currentVersion = 'v0.5.0';
+    $repository = $app['config']['app']['github_url'];
+
     return $app->render('home.twig', [
+        'changelog_url' => "{$repository}/releases/{$currentVersion}", 
         'expiration_date' => date('m/d/Y', strtotime('+1 day')),
+        'download_url' => "{$repository}/releases/download/{$currentVersion}/{$currentVersion}-prepackaged.zip",
+        'download_version' => $currentVersion,
         'github_url' => $app['config']['app']['github_url'],
         'home' => true,
         'message' => $message,

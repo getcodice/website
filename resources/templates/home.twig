@@ -114,20 +114,17 @@
         </div>
     </section>
 
-    <section id="wip" class="container">
-        <h2>The sad part</h2>
+    <section id="download" class="container">
+        <h2>Get Codice now</h2>
         <p>
-            Sounds appealing? Thanks! However, some work still has to be be done. With over
-            <!-- Place a counter so that @winek is happy -->
-            <span class="counter"><span>3</span><span>4</span><span>0</span></span>
-            commits we're currently rather close to the open beta. Do you want to stay in touch?
-            No spam, promise! Maybe three or four of most important status updates in total.
+            Sounds appealing? Thanks. You can download Codice and get it
+            <a href="docs/quickstart">up &amp; running</a> in minutes!
         </p>
 
-        <form action="subscribe" method="post" id="subscribe">
-            <input type="email" name="email" placeholder="Your e-mail">
-            <input type="text" name="question" placeholder="What did Sumerians made their tablets of?">
-            <button type="submit">Subscribe</button>
+        <div class="download-button">
+            <a href="{{ download_url }}" class="btn btn-success btn-xl">Download {{ download_version }}</a>
+            <a href="{{ changelog_url }}" class="download-notes">Show release notes</a>
+        </div>
     </section>
 
     <section id="footer">
