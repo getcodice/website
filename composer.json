@@ -8,6 +8,7 @@
         "silex/silex": "~2.0",
         "league/commonmark": "^0.14.0",
         "twig/twig": "^1.30",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "moust/silex-cache": "^2.0"
     }
 }

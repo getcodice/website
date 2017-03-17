@@ -3,6 +3,7 @@
 use CodiceWeb\Application;
 use CodiceWeb\Providers\DocumentationServiceProvider;
 use Dotenv\Dotenv;
+use Moust\Silex\Provider\CacheServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,13 @@ $dotenv->load();
 $app = new Application();
 
 $app['debug'] = $app['config']['app']['debug'];
+
+$app->register(new CacheServiceProvider(), [
+    'cache.options' => [
+        'driver' => 'file',
+        'cache_dir' => './data/cache'
+    ]
+]);
 
 $app->register(new DocumentationServiceProvider(), array(
     'docs.config' => $app['config']['docs'],
