@@ -33,9 +33,12 @@ $app->register(new DocumentationServiceProvider(), array(
     'docs.config' => $app['config']['docs'],
 ));
 
-$app->register(new TwigServiceProvider(), array(
+$app->register(new TwigServiceProvider(), [
     'twig.path' => 'resources/templates/',
-));
+    'twig.options' => [
+        'cache' => './data/cache/twig'
+    ],
+]);
 
 $app['twig']->addGlobal('base', $app['config']['app']['base_url']);
 $app['twig']->addGlobal('analytics', $app['config']['app']['analytics']);
