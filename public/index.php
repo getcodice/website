@@ -78,39 +78,7 @@ $app->get('/docs', function (Application $app) {
     return $app['docs']->displayChapter($app, $chapter, $version);
 });
 
-$app->post('/subscribe', function (Application $app, Request $request) {
-    session_start();
-
-    if (strtolower(trim($request->get('question'))) !== 'clay') {
-        $_SESSION['message_type'] = 'danger';
-        $_SESSION['message'] = 'An answer to the anti-spam question is incorrect';
-
-        return $app->redirect('');
-    }
-
-    if (!filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['message_type'] = 'danger';
-        $_SESSION['message'] = 'An email is invalid';
-
-        return $app->redirect('');
-    }
-
-    file_put_contents('data/subscribes-db.txt', $request->get('email') . "\n", FILE_APPEND);
-
-    $_SESSION['message_type'] = 'success';
-    $_SESSION['message'] = 'You have subscribed to the status updates. Thank you!';
-
-    return $app->redirect('');
-});
-
 $app->get('/', function (Application $app) {
-    session_start();
-
-    // Flush session
-    $message = isset($_SESSION['message']) ? $_SESSION['message'] : null;
-    $message_type = isset($_SESSION['message_type']) ? $_SESSION['message_type'] : null;
-    session_unset();
-
     $currentVersion = 'v0.5.0';
     $repository = $app['config']['app']['github_url'];
 
@@ -121,8 +89,6 @@ $app->get('/', function (Application $app) {
         'download_version' => $currentVersion,
         'github_url' => $app['config']['app']['github_url'],
         'home' => true,
-        'message' => $message,
-        'message_type' => $message_type
     ]);
 });
 
