@@ -3,7 +3,6 @@
 namespace CodiceWeb;
 
 use League\CommonMark\CommonMarkConverter;
-use League\CommonMark\Environment;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
