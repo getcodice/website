@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-$gitRepository = 'https://github.com/CodiceApp/docs.git';
+$gitRepository = 'https://github.com/getcodice/docs.git';
 $args = array_slice($argv, 1);
-$branches = explode(',', get_option('-b', '0.4,master'));
+$branches = explode(',', get_option('-b', '0.4,0.5,master'));
 $rootDir = rtrim(get_option('-d', __DIR__.'/../docs'), '/');
 $lastArgumentIndex = count($args) - 1;
 
