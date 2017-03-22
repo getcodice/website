@@ -93,14 +93,13 @@ $app->get('/docs', function (Application $app) {
 });
 
 $app->get('/', function (Application $app) {
-    $currentVersion = 'v0.5.0';
-    $repository = $app['config']['app']['github_url'];
+    $release = $app['api']->getRelease('latest');
 
     return $app->render('home.twig', [
-        'changelog_url' => "{$repository}/releases/{$currentVersion}", 
+        'changelog_url' => $release['changelog_url'],
         'expiration_date' => date('m/d/Y', strtotime('+1 day')),
-        'download_url' => "{$repository}/releases/download/{$currentVersion}/{$currentVersion}-prepackaged.zip",
-        'download_version' => $currentVersion,
+        'download_url' => $release['download_url'],
+        'download_version' => $release['version'],
         'github_url' => $app['config']['app']['github_url'],
         'home' => true,
     ]);
