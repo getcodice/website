@@ -11,10 +11,10 @@ class Api
         $this->app = $app;
     }
 
-    public function getChangelog($version = null)
+    public function getReleases()
     {
         // Get GitHub API response
-        $releases = $this->getCachedResponse('codice_changelog', function () {
+        $releases = $this->getCachedResponse('codice_releases', function () {
             return json_decode($this->getGithubResponse('repos/getcodice/codice/releases'), true);
         });
 
@@ -23,19 +23,35 @@ class Api
             return $release['draft'] === false;
         });
 
-        // Rewrite response to version => changelog
+        // Leave only desired values and use desired keys
         $response = [];
 
         foreach ($releases as $release) {
-            $response[$release['tag_name']] = $release['body'];
-        }
+            $version = $release['tag_name'];
 
-        // Limit response to single version if requested
-        if ($version) {
-            $response = $response[$version];
+            $response[$version] = [
+                'version' => $version,
+                'release_date' => $release['created_at'],
+                'changelog' => $release['body'],
+                'changelog_url' => "https://github.com/getcodice/codice/releases/{$version}",
+                'download_url' => "https://github.com/getcodice/codice/releases/download/{$version}/{$version}-prepackaged.zip",
+            ];
         }
 
         return $response;
+    }
+
+    public function getRelease($version)
+    {
+        $releases = $this->getReleases();
+
+        if ($version === 'latest') {
+            return array_values($releases)[0];
+        } elseif (isset($releases[$version])) {
+            return $releases[$version];
+        } else {
+            return [];
+        }
     }
 
     protected function getCachedResponse($cacheKey, $closure, $ttl = 3600)

@@ -46,8 +46,12 @@ $app->register(new TwigServiceProvider(), [
 $app['twig']->addGlobal('base', $app['config']['app']['base_url']);
 $app['twig']->addGlobal('analytics', $app['config']['app']['analytics']);
 
-$app->get('/api/v1/releases/{version}/changelog', function (Application $app, $version) {
-    return $app->json($app['api']->getChangelog($version));
+$app->get('/api/v1/releases/{version}', function (Application $app, $version) {
+    return $app->json($app['api']->getRelease($version));
+});
+
+$app->get('/api/v1/releases', function (Application $app) {
+    return $app->json($app['api']->getReleases());
 });
 
 $app->get('/docs/switch-version/{version}', function (Application $app, $version) {
