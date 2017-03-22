@@ -4,6 +4,7 @@ namespace CodiceWeb;
 
 use Silex\Application as Silex;
 use Silex\Application\TwigTrait;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class Application extends Silex
 {
@@ -14,6 +15,14 @@ class Application extends Silex
         $values['config'] = $this->loadConfig();
 
         parent::__construct($values);
+    }
+
+    public function json($data = [], $status = 200, array $headers = [])
+    {
+        $response = new JsonResponse($data, $status, $headers);
+        $response->setEncodingOptions(JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+        return $response;
     }
 
     public function externalRedirect($url, $status = 302)
