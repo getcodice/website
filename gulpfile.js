@@ -25,7 +25,6 @@ gulp.task('styles', function () {
             includePaths: [
                 './node_modules/bootstrap-sass/assets/stylesheets/',
             ],
-            outputStyle: 'compressed'
         }))
         .on('error', onError)
         .pipe(plugins.csso())
