@@ -3,13 +3,16 @@
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
-    "gulp-csso": "^2.0.0",
-    "gulp-sass": "^2.0.4",
+    "gulp-csso": "^4.0.1",
+    "gulp-sass": "^4.1.0",
     "gulp-util": "^3.0.6"
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
     "font-awesome": "^4.5.0",
-    "jquery": "^2.0.0"
+    "jquery": "^3.5.0"
+  },
+  "resolutions": {
+    "graceful-fs": "4.2.3"
   }
 }
